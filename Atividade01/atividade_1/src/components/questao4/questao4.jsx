@@ -1,7 +1,7 @@
 import React from 'react'
 
 class Aluna extends React.Component {
-    render () {
+    render() {
         return (
             <div>
                 <h3>{this.props.nome}</h3>
@@ -14,5 +14,7 @@ class Aluna extends React.Component {
 
     }
 }
+
+
 
 export default Aluna
