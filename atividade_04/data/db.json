@@ -5,6 +5,18 @@
       "curso": "Engenharia de Software",
       "capacidade": "40",
       "id": 1
+    },
+    {
+      "nome": "Web",
+      "curso": "Engenharia de Software",
+      "capacidade": "40",
+      "id": 2
+    },
+    {
+      "nome": "Projeto Detalhado de Software",
+      "curso": "Engenharia de Software",
+      "capacidade": "40",
+      "id": 3
     }
   ]
 }

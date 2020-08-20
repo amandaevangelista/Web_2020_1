@@ -70,7 +70,7 @@ export default class Inserir extends Component {
                         <input type="text" className="form-control" value={this.state.capacidade} onChange={this.setCapacidade} />
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Criar" className="btn btn-primary" />
+                        <input type="submit" value="Criar Disciplina" className="btn btn-primary" />
                     </div>
                 </form>
             </div>
