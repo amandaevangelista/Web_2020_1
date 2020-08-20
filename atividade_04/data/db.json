@@ -1,0 +1,10 @@
+{
+  "disciplina": [
+    {
+      "nome": "Requisitos de Software",
+      "curso": "Engenharia de Software",
+      "capacidade": "40",
+      "id": 1
+    }
+  ]
+}
