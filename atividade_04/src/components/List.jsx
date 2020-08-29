@@ -8,6 +8,8 @@ export default class List extends Component {
     constructor(props) {
         super(props)
         this.state = { disciplina: [] }
+        this.apagarElementoPorId = this.apagarElementoPorId.bind(this)
+        
     }
     componentDidMount() {
         axios.get('http://localhost:3002/disciplina')
@@ -27,10 +29,21 @@ export default class List extends Component {
         if (!this.state.disciplina) return
         return this.state.disciplina.map(
             (disciplinas, i) => {
-                return <TableRow disciplina={disciplinas} key={i} />;
+                return <TableRow disciplina={disciplinas} key={i} apagarElementoPorId = {this.apagarElementoPorId} />;
             }
         )
     }
+
+    apagarElementoPorId(id) {
+        let disciplinaTemp = this.state.disciplina
+        for (let i = 0; i < disciplinaTemp.length; i++) {
+            if (disciplinaTemp[i].id === id) {
+                disciplinaTemp.splice(i, 1)
+            }
+        }
+        this.setState({ disciplina: disciplinaTemp })
+    }
+
 
 
     render() {
@@ -44,13 +57,15 @@ export default class List extends Component {
                             <th>Nome</th>
                             <th>Curso</th>
                             <th>Capacidade</th>
+                            <th colSpan="2"></th>
+
                         </tr>
 
                     </thead>
 
                     <tbody>
-                        
-                    {this.montarTabela()}
+
+                        {this.montarTabela()}
 
                     </tbody>
 
