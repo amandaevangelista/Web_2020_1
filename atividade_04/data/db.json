@@ -1,5 +1,5 @@
 {
-  "disciplina": [
+  "disciplinas": [
     {
       "nome": "Requisitos de Software",
       "curso": "Engenharia de Software",
@@ -13,10 +13,22 @@
       "id": 3
     },
     {
+      "nome": "Gerência de Software",
+      "curso": "Engenharia de Software",
+      "capacidade": "50",
+      "id": 5
+    },
+    {
+      "nome": "Interação Humano Computador",
+      "curso": "Engenharia de Software",
+      "capacidade": "40",
+      "id": 6
+    },
+    {
       "nome": "Web",
       "curso": "Engenharia de Software",
       "capacidade": "40",
-      "id": 4
+      "id": 7
     }
   ]
 }

@@ -13,7 +13,7 @@ export default class Edit extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3002/disciplina/' + this.props.match.params.id)
+        axios.get('http://localhost:3002/disciplinas/' + this.props.match.params.id)
             .then(
                 (res) => {
                     this.setState(
@@ -47,7 +47,7 @@ export default class Edit extends Component {
 
         const disciplinaEditada = { nome: this.state.nome, curso: this.state.curso, capacidade: this.state.capacidade }
 
-        axios.put('http://localhost:3002/disciplina/' + this.props.match.params.id, disciplinaEditada)
+        axios.put('http://localhost:3002/disciplinas/' + this.props.match.params.id, disciplinaEditada)
             .then(
                 res => {
                     

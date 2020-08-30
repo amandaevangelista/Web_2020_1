@@ -12,7 +12,7 @@ export default class List extends Component {
         
     }
     componentDidMount() {
-        axios.get('http://localhost:3002/disciplina')
+        axios.get('http://localhost:3002/disciplinas')
             .then(
                 (res) => {
                     this.setState({ disciplina: res.data })

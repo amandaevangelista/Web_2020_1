@@ -10,7 +10,7 @@ export default class TableRow extends Component {
     }
 
     apagar() {
-        axios.delete('http://localhost:3002/disciplina/' + this.props.disciplina.id)
+        axios.delete('http://localhost:3002/disciplinas/' + this.props.disciplina.id)
 
             .then(res => this.props.apagarElementoPorId(this.props.disciplina.id))
             .catch((error) => console.log(error))
