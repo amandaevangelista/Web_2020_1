@@ -15,8 +15,8 @@ router.post('/register', function (req, res, next) {
 })
 
 router.put('/update/:id', function (req, res, next) {
-    res.json(DisciplinaService.update(req.params.id, req.body))
-
+    res.json(DisciplinaService.update(req.params.id, req.body)) 
+    
 })
 
 router.delete('/delete/:id', function (req, res, next) {
@@ -26,7 +26,8 @@ router.delete('/delete/:id', function (req, res, next) {
 })
 
 router.get('/retrieve/:id', function (req, res, next) {
-    res.json(DisciplinaService.retrive(req.params.id))
+    res.json(DisciplinaService.retrieve(req.params.id))
+
 })
 
 
