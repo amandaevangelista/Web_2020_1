@@ -14,4 +14,6 @@ app.use(cookieParser())
 
 app.use('/users', users)
 app.use('/disciplinas', DisciplinaRoute)
+
+
 module.exports = app
