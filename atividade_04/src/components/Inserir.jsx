@@ -36,10 +36,11 @@ export default class Inserir extends Component {
             capacidade: this.state.capacidade
         }
 
-        axios.post('http://localhost:3002/disciplinas', novaDisciplina)
+        axios.post('http://localhost:3001/disciplinas/register', novaDisciplina)
+        //('http://localhost:3002/disciplinas', novaDisciplina)
             .then(
                 (res) => {
-                    console.log('Disciplina adicionada!')
+                    console.log('Disciplina' + res.data._id + 'adicionada!')
                 }
             )
             .catch(
