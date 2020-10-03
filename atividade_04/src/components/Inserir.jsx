@@ -1,21 +1,22 @@
 import React, { Component } from 'react'
 
-
 import FirebaseContext from '../utils/FirebaseContext'
 import FirebaseService from '../services/FirebaseService'
 
-
 const CreatePage = () => (
     <FirebaseContext.Consumer>
-        { firebase => <Inserir firebase={firebase} />}
+        {firebase => <Inserir firebase={firebase} />}
     </FirebaseContext.Consumer>
 )
 
 
 class Inserir extends Component {
+
     constructor(props) {
-        super(props);
-        this.state = { nome: '', curso: '', capacidade: '' };
+        super(props)
+
+        this.state = { nome: '', curso: '', capacidade: '' }
+
         this.setNome = this.setNome.bind(this)
         this.setCurso = this.setCurso.bind(this)
         this.setCapacidade = this.setCapacidade.bind(this)
@@ -34,28 +35,28 @@ class Inserir extends Component {
         this.setState({ capacidade: e.target.value })
     }
 
-
     onSubmit(e) {
         e.preventDefault()
-        const disciplinas = {
+        const disciplina = {
             nome: this.state.nome,
             curso: this.state.curso,
-            capacidade: this.state.capacidade,
-
+            capacidade: this.state.capacidade
         }
+        
         FirebaseService.create(this.props.firebase.getFirestore(),
             (mensagem) => {
                 console.log(mensagem)
             },
-            disciplinas)
+            disciplina)
         this.setState({ nome: '', curso: '', capacidade: '' })
     }
 
     render() {
         return (
-            <div style={{ marginTop: 13 }}>
-                <h3>Criar Disciplina</h3>
+            <div style={{ marginTop: 10 }}>
+                <h3>Criar disciplina</h3>
                 <form onSubmit={this.onSubmit}>
+
                     <div className="form-group">
                         <label>Nome: </label>
                         <input type="text" className="form-control"
@@ -71,10 +72,12 @@ class Inserir extends Component {
                         <input type="text" className="form-control"
                             value={this.state.capacidade} onChange={this.setCapacidade} />
                     </div>
+
                     <div className="form-group">
-                        <input type="submit" value="Criar Disciplina" className="btn btn-primary" />
+                        <input type="submit" value="Criar disciplina" className="btn btn-primary" />
                     </div>
                 </form>
+
             </div>
         )
     }

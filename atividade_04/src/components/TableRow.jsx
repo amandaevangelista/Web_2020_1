@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+
 import FirebaseService from '../services/FirebaseService'
-
-
 
 export default class TableRow extends Component {
 
@@ -21,7 +20,6 @@ export default class TableRow extends Component {
         }
     }
 
-
     render() {
         return (
             <tr>
@@ -35,7 +33,7 @@ export default class TableRow extends Component {
                     {this.props.disciplina.curso}
                 </td>
                 <td>
-                    {this.props.disciplina.capacidade}
+                    {this.props.disciplina.capacidad}
                 </td>
                 <td style={{ textAlign: "center" }}>
                     <Link to={"/edit/" + this.props.disciplina._id} className="btn btn-primary">Editar</Link>
@@ -44,7 +42,7 @@ export default class TableRow extends Component {
                     <button onClick={() => this.apagar(this.props.disciplina._id, this.props.disciplina.nome)}
                         className="btn btn-danger">
                         Apagar
-        </button>
+                    </button>
                 </td>
             </tr>
         )

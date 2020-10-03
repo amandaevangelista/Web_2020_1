@@ -9,12 +9,15 @@ const ListPage = () => (
         {firebase => <List firebase={firebase} />}
     </FirebaseContext.Consumer>
 )
+
 class List extends Component {
+
     constructor(props) {
         super(props)
+
         //firebase
         this._isMounted = false
-        this._isMounted = false
+
         this.state = { disciplinas: [], loading: false }
         this.apagarElementoPorId = this.apagarElementoPorId.bind(this)
     }
@@ -22,14 +25,17 @@ class List extends Component {
     componentDidMount() {
         this._isMounted = true
         this.setState({ loading: true })
+
         FirebaseService.list(this.props.firebase.getFirestore(),
             (disciplinas) => {
                 this._isMounted && this.setState({ disciplinas: disciplinas, loading: false })
             })
     }
+
     componentWillUnmount() {
         this._isMounted = false
     }
+
     apagarElementoPorId(id) {
         let tempDisciplinas = this.state.disciplinas
         for (let i = 0; i < tempDisciplinas.length; i++) {
@@ -45,7 +51,7 @@ class List extends Component {
         if (this.state.loading) return this.loadingSpinner()
         return this.state.disciplinas.map(
             (est, i) => {
-                return <TableRow disciplinas={est}
+                return <TableRow disciplina={est}
                     key={i}
                     apagarElementoPorId={this.apagarElementoPorId}
                     firebase={this.props.firebase} />
@@ -68,6 +74,7 @@ class List extends Component {
             </tr>
         )
     }
+
     render() {
         return (
             <div style={{ marginTop: 10 }}>
