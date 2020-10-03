@@ -1,89 +1,89 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import TableRow from './TableRow'
+import FirebaseContext from '../utils/FirebaseContext'
+import FirebaseService from '../services/FirebaseService'
 
-export default class Edit extends Component {
 
+const ListPage = () => (
+    <FirebaseContext.Consumer>
+        {firebase => <List firebase={firebase} />}
+    </FirebaseContext.Consumer>
+)
+class List extends Component {
     constructor(props) {
         super(props)
-        this.state = { nome: '', curso: '', capacidade: '' }
-        this.setNome = this.setNome.bind(this)
-        this.setCurso = this.setCurso.bind(this)
-        this.setcapacidade = this.setcapacidade.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
+        //firebase
+        this._isMounted = false
+        this.state = { estudantes: [], loading: false }
+        this.apagarElementoPorId = this.apagarElementoPorId.bind(this)
     }
-
     componentDidMount() {
-        axios.get('http://localhost:3001/disciplinas/retrieve/' + this.props.match.params.id)
-        //axios.get('http://localhost:3002/disciplinas/' + this.props.match.params.id)
-            .then(
-                (res) => {
-                    this.setState(
-                        {
-                            nome: res.data.nome,
-                            curso: res.data.curso,
-                            capacidade: res.data.capacidade
-                        }
-                    )
-                }
-            )
-            .catch(
-                (error) => {
-                    console.log(error)
-                }
-            )
+        this._isMounted = true
+        this.setState({ loading: true })
+        FirebaseService.list(this.props.firebase.getFirestore(),
+            (estudantes) => {
+                this._isMounted && this.setState({ estudantes: estudantes, loading: false })
+            })
     }
-
-    setNome(e) {
-        this.setState({ nome: e.target.value })
+    componentWillUnmount() {
+        this._isMounted = false
     }
-    setCurso(e) {
-        this.setState({ curso: e.target.value })
+    apagarElementoPorId(id) {
+        let tempEstudantes = this.state.estudantes
+        for (let i = 0; i < tempEstudantes.length; i++) {
+            if (tempEstudantes[i]._id === id) {
+                tempEstudantes.splice(i, 1)
+            }
+        }
+        this._isMounted && this.setState({ estudantes: tempEstudantes })
     }
-    setcapacidade(e) {
-        this.setState({ capacidade: e.target.value })
+    montarTabela() {
+        if (!this.state.estudantes) return
+        if (this.state.loading) return this.loadingSpinner()
+        return this.state.estudantes.map(
+            (est, i) => {
+                return <TableRow estudante={est}
+                    key={i}
+                    apagarElementoPorId={this.apagarElementoPorId}
+                    firebase={this.props.firebase} />
+            }
+        )
     }
-
-    onSubmit(e) {
-        e.preventDefault()
-
-        const disciplinaEditada = { nome: this.state.nome, curso: this.state.curso, capacidade: this.state.capacidade }
-
-        axios.put('http://localhost:3001/disciplinas/update/' + this.props.match.params.id, disciplinaEditada)
-        //('http://localhost:3002/disciplinas/' + this.props.match.params.id, disciplinaEditada)
-            .then(
-                res => {
-                    
-                    this.props.history.push('/list');
-                }
-            )
-            .catch(error => console.log(error))
+    loadingSpinner() {
+        return (
+            <tr style={{ backgroundColor: '#fff' }}>
+                <td colSpan='6'>
+                    <div className="text-center">
+                        <div className="spinner-border ml-auto"
+                            role="status"
+                            aria-hidden="true"
+                            style={{ width: '3rem', height: '3rem' }}></div><br />
+                        <strong>Loading...</strong>
+                    </div>
+                </td>
+            </tr>
+        )
     }
-
     render() {
         return (
-            <div style={{ marginTop: 13 }}>
-                <h3>Editar Disciplina</h3>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>Nome: </label>
-                        <input type="text" className="form-control"
-                            value={this.state.nome} onChange={this.setNome} />
-                    </div>
-                    <div className="form-group">
-                        <label>Curso: </label>
-                        <input type="text" className="form-control"
-                            value={this.state.curso} onChange={this.setCurso} />
-                    </div>
-                    <div className="form-group">
-                        <label>Capacidade: </label>
-                        <input type="text" className="form-control"
-                            value={this.state.capacidade} onChange={this.setcapacidade} />
-                    </div>
-                    <div className="form-group">
-                        <input type="submit" value="Editar Disciplina" className="btn btn-primary" />
-                    </div>
-                </form>
+            <div style={{ marginTop: 10 }}>
+                <h3>Listar Estudantes</h3>
+                <table className="table table-striped" style={{ marginTop: 20 }}>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Curso</th>
+                            <th>IRA</th>
+                            <th colSpan="2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.montarTabela()}
+                    </tbody>
+                </table>
             </div>
         )
     }
-}   
+}
+export default ListPage   

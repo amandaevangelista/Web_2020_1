@@ -1,7 +1,18 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 
-export default class Inserir extends Component {
+
+import FirebaseContext from '../utils/FirebaseContext'
+import FirebaseService from '../services/FirebaseService'
+
+
+const CreatePage = () => (
+    <FirebaseContext.Consumer>
+        { firebase => <Inserir firebase={firebase} />}
+    </FirebaseContext.Consumer>
+)
+
+
+class Inserir extends Component {
     constructor(props) {
         super(props);
         this.state = { nome: '', curso: '', capacidade: '' };
@@ -26,55 +37,46 @@ export default class Inserir extends Component {
 
     onSubmit(e) {
         e.preventDefault()
-        /* console.log('Nome: ' + this.state.nome)
-         console.log('Curso: ' + this.state.curso)
-         console.log('Capacidade: ' + this.state.capacidade)*/
-
-        const novaDisciplina = {
+        const disciplinas = {
             nome: this.state.nome,
             curso: this.state.curso,
-            capacidade: this.state.capacidade
+            capacidade: this.state.capacidade,
+
         }
-
-        axios.post('http://localhost:3001/disciplinas/register', novaDisciplina)
-        //('http://localhost:3002/disciplinas', novaDisciplina)
-            .then(
-                (res) => {
-                    console.log('Disciplina' + res.data._id + 'adicionada!')
-                }
-            )
-            .catch(
-                (error) => {
-                    console.log(error)
-                }
-            )
-
+        FirebaseService.create(this.props.firebase.getFirestore(),
+            (mensagem) => {
+                console.log(mensagem)
+            },
+            disciplinas)
         this.setState({ nome: '', curso: '', capacidade: '' })
     }
-
 
     render() {
         return (
             <div style={{ marginTop: 13 }}>
-                <h2>Criar Disciplina</h2>
+                <h3>Criar Disciplina</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Nome: </label>
-                        <input type="text" className="form-control" value={this.state.nome} onChange={this.setNome} />
+                        <input type="text" className="form-control"
+                            value={this.state.nome} onChange={this.setNome} />
                     </div>
                     <div className="form-group">
                         <label>Curso: </label>
-                        <input type="text" className="form-control" value={this.state.curso} onChange={this.setCurso} />
+                        <input type="text" className="form-control"
+                            value={this.state.curso} onChange={this.setCurso} />
                     </div>
                     <div className="form-group">
                         <label>Capacidade: </label>
-                        <input type="text" className="form-control" value={this.state.capacidade} onChange={this.setCapacidade} />
+                        <input type="text" className="form-control"
+                            value={this.state.capacidade} onChange={this.setCapacidade} />
                     </div>
                     <div className="form-group">
                         <input type="submit" value="Criar Disciplina" className="btn btn-primary" />
                     </div>
                 </form>
             </div>
-        );
+        )
     }
 }
+export default CreatePage
