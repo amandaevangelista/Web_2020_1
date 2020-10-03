@@ -33,7 +33,7 @@ export default class TableRow extends Component {
                     {this.props.disciplina.curso}
                 </td>
                 <td>
-                    {this.props.disciplina.capacidad}
+                    {this.props.disciplina.capacidade}
                 </td>
                 <td style={{ textAlign: "center" }}>
                     <Link to={"/edit/" + this.props.disciplina._id} className="btn btn-primary">Editar</Link>

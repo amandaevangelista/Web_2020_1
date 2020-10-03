@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import TableRow from './TableRow'
-
 import FirebaseContext from '../utils/FirebaseContext'
 import FirebaseService from '../services/FirebaseService'
 
@@ -9,15 +8,11 @@ const ListPage = () => (
         {firebase => <List firebase={firebase} />}
     </FirebaseContext.Consumer>
 )
-
 class List extends Component {
-
     constructor(props) {
         super(props)
 
-        //firebase
         this._isMounted = false
-
         this.state = { disciplinas: [], loading: false }
         this.apagarElementoPorId = this.apagarElementoPorId.bind(this)
     }
@@ -25,7 +20,6 @@ class List extends Component {
     componentDidMount() {
         this._isMounted = true
         this.setState({ loading: true })
-
         FirebaseService.list(this.props.firebase.getFirestore(),
             (disciplinas) => {
                 this._isMounted && this.setState({ disciplinas: disciplinas, loading: false })
@@ -74,11 +68,10 @@ class List extends Component {
             </tr>
         )
     }
-
     render() {
         return (
             <div style={{ marginTop: 10 }}>
-                <h3>Lista disciplinas</h3>
+                <h3>Listar Disciplinas</h3>
                 <table className="table table-striped" style={{ marginTop: 20 }}>
                     <thead>
                         <tr>
@@ -97,4 +90,5 @@ class List extends Component {
         )
     }
 }
+
 export default ListPage

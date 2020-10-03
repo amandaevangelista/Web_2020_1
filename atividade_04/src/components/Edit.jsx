@@ -10,12 +10,9 @@ const EditPage = (props) => (
 )
 
 class Edit extends Component {
-
     constructor(props) {
         super(props)
-
-        this.state = { nome: '', curso: '', IRA: '' }
-
+        this.state = { nome: '', curso: '', capacidade: '' }
         this.setNome = this.setNome.bind(this)
         this.setCurso = this.setCurso.bind(this)
         this.setCapacidade = this.setCapacidade.bind(this)
@@ -23,27 +20,25 @@ class Edit extends Component {
     }
 
     componentDidMount() {
+
         FirebaseService.retrieve(this.props.firebase.getFirestore(),
             (disciplina) => {
                 if (disciplina)
                     this.setState({
                         nome: disciplina.nome,
                         curso: disciplina.curso,
-                        capacidade: disciplina.IRA
+                        capacidade: disciplina.capacidade
                     })
             },
             this.props.id
         )
     }
-
     setNome(e) {
         this.setState({ nome: e.target.value })
     }
-
     setCurso(e) {
         this.setState({ curso: e.target.value })
     }
-
     setCapacidade(e) {
         this.setState({ capacidade: e.target.value })
     }
@@ -67,9 +62,8 @@ class Edit extends Component {
     render() {
         return (
             <div style={{ marginTop: 10 }}>
-                <h3>Editar disciplina</h3>
+                <h3>Editar Disciplina</h3>
                 <form onSubmit={this.onSubmit}>
-
                     <div className="form-group">
                         <label>Nome: </label>
                         <input type="text" className="form-control"
@@ -85,15 +79,12 @@ class Edit extends Component {
                         <input type="text" className="form-control"
                             value={this.state.capacidade} onChange={this.setCapacidade} />
                     </div>
-
                     <div className="form-group">
-                        <input type="submit" value="Editar disciplina" className="btn btn-primary" />
+                        <input type="submit" value="Editar Disciplina" className="btn btn-primary" />
                     </div>
                 </form>
-
             </div>
         )
     }
 }
-
 export default EditPage

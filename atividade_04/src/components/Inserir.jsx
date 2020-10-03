@@ -54,7 +54,7 @@ class Inserir extends Component {
     render() {
         return (
             <div style={{ marginTop: 10 }}>
-                <h3>Criar disciplina</h3>
+                <h3>Criar Disciplina</h3>
                 <form onSubmit={this.onSubmit}>
 
                     <div className="form-group">
@@ -74,7 +74,7 @@ class Inserir extends Component {
                     </div>
 
                     <div className="form-group">
-                        <input type="submit" value="Criar disciplina" className="btn btn-primary" />
+                        <input type="submit" value="Criar Disciplina" className="btn btn-primary" />
                     </div>
                 </form>
 
