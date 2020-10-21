@@ -1,15 +1,17 @@
-import { SIGNUP_SUCCESS, SIGNUP_ERROR, SIGNIN_SUCCESS, SIGNIN_ERROR } from './actionsTypes'
+import { SIGNUP_SUCCESS, SIGNUP_ERROR, SIGNIN_SUCCESS, SIGNIN_ERROR, SIGNOUT_SUCCESS, SIGNOUT_ERROR } from './actionsTypes'
 import firebase from '../../utils/Firebase'
+
+const auth = firebase.getAuth()
+
 
 export const signup = (email, password) => {
     return dispatch => {
         try {
-            firebase
-            .auth()
+             auth
             .createUserWithEmailAndPassword(email, password)
             .then(
                 () => {
-                    firebase.auth().onAuthStateChanged(
+                    auth.onAuthStateChanged(
                             (user) => {
                                 if (user) {
                                     dispatch({
@@ -51,8 +53,7 @@ export const signup = (email, password) => {
 export const signin = (email, password, callback) => {
     return dispatch => {
         try{
-            firebase
-            .auth()
+            auth
             .signInWithEmailAndPassword(email, password)
             .then(
                 (data) => {
@@ -77,6 +78,40 @@ export const signin = (email, password, callback) => {
         catch(error){
             dispatch({
                 type: SIGNIN_ERROR,
+                payload: { authMessage: `Erro na conexão com o firebase: ${error}` }
+            })
+            callback()
+        }
+    }
+}
+
+export const signout = (callback) => {
+    return dispatch =>{
+        try{
+            auth
+            .signOut()
+            .then(
+                () => {
+                    dispatch({
+                        type: SIGNOUT_SUCCESS,
+                        payload: { authMessage: `Logout efetuado com sucesso` }
+                    })
+                    callback()
+                }
+            )
+            .catch(
+                (error) => {
+                    dispatch({
+                        type: SIGNOUT_ERROR,
+                        payload: { authMessage: `Erro no logout: ${error}` }
+                    })
+                    callback()
+                }
+            )
+        }
+        catch(error){
+            dispatch({
+                type: SIGNOUT_ERROR,
                 payload: { authMessage: `Erro na conexão com o firebase: ${error}` }
             })
             callback()

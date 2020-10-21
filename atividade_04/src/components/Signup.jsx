@@ -38,13 +38,13 @@ class Signup extends Component {
                     <div className='form-group'>
                         <label>Login:</label>
                         <input type='text' className='form-control'
-                            value={this.state.login}  onChange={(e) => this.setLogin(e)} />
+                            value={this.state.login} onChange={this.setLogin} />
                     </div>
 
                     <div className='form-group'>
                         <label>Password:</label>
                         <input type='password' className='form-control'
-                            value={this.state.password} onChange={(e) => this.setPassword(e)} />
+                            value={this.state.password} onChange={this.setPassword} />
                     </div>
 
                     <input type='submit' value='Cadastrar' className='btn btn-primary' />

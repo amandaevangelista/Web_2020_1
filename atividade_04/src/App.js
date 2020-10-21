@@ -7,9 +7,9 @@ import Edit from './components/Edit';
 import Home from './components/Main'
 import Signin from './components/Signin'
 import Signup from './components/Signup'
+import Signout from './components/Signout'
 
 import { connect } from 'react-redux'
-
 
 
  class App extends Component {
@@ -36,6 +36,9 @@ import { connect } from 'react-redux'
                 <li>
                   <Link to={'/list'} className = "nav-link">Listar</Link>
                 </li>
+                <li>
+                  <Link to={'/signout'} className = 'nav-link'>Signout</Link>
+                </li>
               </ul>
             </div>
           </nav>
@@ -47,6 +50,7 @@ import { connect } from 'react-redux'
             <Route path='/inserir' component = {Inserir} />
             <Route path='/list' component = {List} />
             <Route path='/edit/:id' component = {Edit} />
+            <Route path='/signout' component = {Signout} />
           </Switch>
         </div>
       </BrowserRouter>

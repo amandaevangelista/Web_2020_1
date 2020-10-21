@@ -48,10 +48,12 @@ import { signin } from '../store/actions/authActionCreator'
                         <input type='password' className='form-control'
                             value={this.state.password} onChange={this.setPassword} />
                     </div>
-
                     <input type='submit' value='Login' className='btn btn-primary' />
-
                 </form>
+
+                <div className = 'alert alert-info' style = {{marginTop : '10px'}}>
+                    {this.props.userMsg}
+                </div>
 
             </Card>
         )

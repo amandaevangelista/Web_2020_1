@@ -10,7 +10,7 @@ import FirebaseContext from './utils/FirebaseContext'
 
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import reduxThunk from 'redux-thunk'
 
 import reducer from './store/reducers'
@@ -33,7 +33,7 @@ const rrfProps = {
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <FirebaseContext.Provider value={new firebase()}>
+      <FirebaseContext.Provider value = {firebase}>
         <App />
       </FirebaseContext.Provider>,
     </ReactReduxFirebaseProvider>
