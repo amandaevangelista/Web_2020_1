@@ -8,6 +8,21 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: Consolas,"courier new";
+}
+
+.card{
+  margin-top: 20px;
+  width: 80%;
+}
+
+.card .card-header{
+  font-weight: bold;
+  
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

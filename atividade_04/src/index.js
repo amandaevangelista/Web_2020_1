@@ -1,20 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import Firebase from './utils/Firebase'
+import firebase from './utils/Firebase'
 import FirebaseContext from './utils/FirebaseContext'
 
+
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
+import reduxThunk from 'redux-thunk'
+
+import reducer from './store/reducers'
+
+
+const store = createStore(
+  reducer,
+  {},
+  applyMiddleware(reduxThunk)
+)
+
+const rrfProps = {
+  firebase,
+  config: {},
+  dispatch: store.dispatch
+}
+
+
+
 ReactDOM.render(
-  <FirebaseContext.Provider value = {new Firebase()}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </FirebaseContext.Provider>
-  ,
+  <Provider store={store}>
+    <ReactReduxFirebaseProvider {...rrfProps}>
+      <FirebaseContext.Provider value={new firebase()}>
+        <App />
+      </FirebaseContext.Provider>,
+    </ReactReduxFirebaseProvider>
+  </Provider>,
   document.getElementById('root')
 );
 
