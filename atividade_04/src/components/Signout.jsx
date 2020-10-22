@@ -6,12 +6,6 @@ import { signout } from '../store/actions/authActionCreator'
 
  class Signout extends Component {
 
-    componentDidMount(){
-        if(this.props.firebaseAuth.isLoaded && this.props.firebaseAuth.isEmpty) {
-            this.props.history.push('/signin')
-        }
-    }
-
     logout(){
         this.props.mySignout(
             () => {
@@ -33,8 +27,9 @@ import { signout } from '../store/actions/authActionCreator'
 
 function mapStateToProps(state) {
     return {
-        userMsg: state.authReducer.authMsg,
-        firebaseAuth: state.firebaseReducer.auth
+        auth: state.firebaseReducer.auth,
+        authMsg: state.authReducer.authMsg,
+        verified: state.authReducer.verified
     }
 }
 

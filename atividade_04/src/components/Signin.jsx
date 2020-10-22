@@ -66,13 +66,13 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
+function mapDispatchToProps(dispatch){
+    return{
         mySignin(login, password, callback) {
             const action = signin(login, password, callback)
-            dispatch(action)
+            dispatch(action)  
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signin)
+export default connect(mapStateToProps,mapDispatchToProps)(Signin)
