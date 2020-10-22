@@ -4,29 +4,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import firebase from './utils/Firebase'
 import FirebaseContext from './utils/FirebaseContext'
+import firebase from './utils/Firebase'
 
-
-import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
-import reduxThunk from 'redux-thunk'
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 
-import reducer from './store/reducers'
-
-
-const store = createStore(
-  reducer,
-  {},
-  applyMiddleware(reduxThunk)
-)
-
-const rrfProps = {
-  firebase,
-  config: {},
-  dispatch: store.dispatch
-}
+import {store, rrfProps} from './store/storeConfig'
 
 
 

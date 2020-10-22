@@ -3,7 +3,7 @@ import { SIGNUP_SUCCESS, SIGNUP_ERROR, SIGNIN_SUCCESS, SIGNIN_ERROR, SIGNOUT_SUC
 const INITIAL_STATE = {
     authMsg: null,
     user: null
-}
+};
 
 export default function (state = INITIAL_STATE, action) {
 
@@ -36,7 +36,6 @@ export default function (state = INITIAL_STATE, action) {
 
         case SIGNOUT_SUCCESS:
             return {
-
                 user: null,
                 authMsg: action.payload.authMessage
                 
