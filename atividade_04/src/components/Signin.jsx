@@ -14,12 +14,12 @@ import { signin } from '../store/actions/authActionCreator'
         this.onSubmit = this.onSubmit.bind(this)
     }
 
-    setLogin(e) {
-        this.setState({ login: e.target.value })
+    setLogin(e){
+        this.setState({login:e.target.value})
     }
 
-    setPassword(e) {
-        this.setState({ password: e.target.value })
+    setPassword(e){
+        this.setState({password:e.target.value})
     }
 
     onSubmit(e) {

@@ -1,8 +1,8 @@
-import { SIGNUP_SUCCESS, SIGNUP_ERROR, SIGNIN_SUCCESS, SIGNIN_ERROR, SIGNOUT_SUCCESS, SIGNOUT_ERROR, EMAIL_NOT_VERIFIED } from './actionsTypes'
+import { SIGNUP_SUCCESS, SIGNUP_ERROR, SIGNIN_SUCCESS, SIGNIN_ERROR, SIGNOUT_SUCCESS, SIGNOUT_ERROR, EMAIL_NOT_VERIFIED,RESET_AUTH_MSG} from './actionsTypes'
 import firebase from '../../utils/Firebase'
 
-const auth = firebase.getAuth()
 
+const auth = firebase.getAuth()
 
 export const signup = (email, password) => {
     return dispatch => {
@@ -123,7 +123,7 @@ export const signout = (callback) => {
                         payload: { authMessage: `Logout efetuado com sucesso`,
                         verified: false
                      }
-                     
+
                     })
                     callback()
                 }
@@ -145,6 +145,12 @@ export const signout = (callback) => {
             })
             callback()
         }
+    }
+}
+
+export const resetAuthMsg = () => {
+    return {
+        type: RESET_AUTH_MSG
     }
 }
 

@@ -1,4 +1,4 @@
-import { SIGNUP_SUCCESS, SIGNUP_ERROR, SIGNIN_SUCCESS, SIGNIN_ERROR, SIGNOUT_SUCCESS, SIGNOUT_ERROR, EMAIL_NOT_VERIFIED } from '../actions/actionsTypes'
+import { SIGNUP_SUCCESS, SIGNUP_ERROR, SIGNIN_SUCCESS, SIGNIN_ERROR, SIGNOUT_SUCCESS, SIGNOUT_ERROR, EMAIL_NOT_VERIFIED, RESET_AUTH_MSG } from '../actions/actionsTypes'
 
 const INITIAL_STATE = {
     authMsg: null,
@@ -56,6 +56,13 @@ export default function (state = INITIAL_STATE, action) {
                 ...state,
                 authMsg: action.payload.authMessage,
                 verified: action.payload.verified
+            }
+
+            case RESET_AUTH_MSG:
+            return {
+                ...state,
+                authMsg: null
+                
             }
 
 
